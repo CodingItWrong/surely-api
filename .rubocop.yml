@@ -1,0 +1,68 @@
+# https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+AllCops:
+  TargetRubyVersion: 2.6
+
+  # Don't check binstubs or gemfile
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'config.ru'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'spec/*_helper.rb'
+    - 'vendor/**/*'
+
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+
+Layout/IndentFirstArrayElement:
+  Enabled: false
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+# Don't require a class comment
+Style/Documentation:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+# Require trailing commas for multiline arrays
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+# Require trailing commas for multiline hashes
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+# Require trailing commas for multiline argument lists
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+# Allow but do not require modifier usage of if/unless
+Style/IfUnlessModifier:
+  Enabled: false
+
+# Default Rails files have comment lines this long
+Metrics/LineLength:
+  Enabled: false
+
+# Allow *%i[…]
+Lint/UnneededSplatExpansion:
+  Enabled: false
+Lint/AmbiguousOperator:
+  Enabled: false
+
+# The examples I see always use stabby lambdas
+Style/Lambda:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
