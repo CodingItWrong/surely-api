@@ -4,16 +4,16 @@ AllCops:
 
   # Don't check binstubs or gemfile
   Exclude:
-    - 'bin/**/*'
-    - 'config/**/*'
-    - 'config.ru'
-    - 'db/migrate/*'
-    - 'db/schema.rb'
-    - 'node_modules/**/*'
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'spec/*_helper.rb'
-    - 'vendor/**/*'
+    - "bin/**/*"
+    - "config/**/*"
+    - "config.ru"
+    - "db/migrate/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "Gemfile"
+    - "Rakefile"
+    - "spec/*_helper.rb"
+    - "vendor/**/*"
 
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
@@ -55,7 +55,7 @@ Metrics/LineLength:
   Enabled: false
 
 # Allow *%i[…]
-Lint/UnneededSplatExpansion:
+Lint/RedundantSplatExpansion:
   Enabled: false
 Lint/AmbiguousOperator:
   Enabled: false
