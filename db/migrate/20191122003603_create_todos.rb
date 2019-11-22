@@ -1,6 +1,6 @@
 class CreateTodos < ActiveRecord::Migration[6.0]
   def change
-    create_table :todos do |t|
+    create_table :todos, id: :uuid do |t|
       t.string :name
 
       t.timestamps
