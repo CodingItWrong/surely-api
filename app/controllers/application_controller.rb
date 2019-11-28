@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'jsonapi-resources'
-
 class ApplicationController < JSONAPI::ResourceController
   skip_before_action :verify_authenticity_token
 
