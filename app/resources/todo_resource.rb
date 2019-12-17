@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class TodoResource < ApplicationResource
-  attributes :name, :created_at
+  attributes :name, :created_at, :completed_at, :deleted_at
   has_one :user
 
   before_create { _model.user = current_user }
