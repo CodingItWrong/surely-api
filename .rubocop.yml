@@ -18,7 +18,7 @@ AllCops:
 Layout/EmptyLineAfterMagicComment:
   Enabled: false
 
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   Enabled: false
 
 Layout/SpaceInsideHashLiteralBraces:
