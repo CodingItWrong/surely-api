@@ -10,7 +10,7 @@ class TodoResource < ApplicationResource
   end
 
   def self.updatable_fields(context)
-    super - %i[user  created_at, updated_at]
+    super - %i[user created_at updated_at]
   end
 
   def self.records(options = {})
