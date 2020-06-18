@@ -17,4 +17,8 @@ class TodoResource < ApplicationResource
     user = current_user(options)
     user.todos
   end
+
+  filter :status, apply: ->(records, value, _options) {
+    records.status(value.first)
+  }
 end
