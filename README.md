@@ -1,6 +1,8 @@
 # Surely
 
-This is a short description of your app.
+API for a todo list application.
+
+Frontend is handled by [surely-ember](https://github.com/CodingItWrong/surely-ember).
 
 ## Getting Started
 
@@ -53,5 +55,9 @@ get '/widgets', headers: headers
 ```sh
 $ rails server
 ```
+
+### Deploying
+
+[Heroku](https://www.heroku.com/) is a good backend hosting option.
 
 [postgres-app]: http://postgresapp.com
