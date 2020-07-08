@@ -17,7 +17,7 @@ class Todo < ApplicationRecord
 
   scope :tomorrow, -> {
     where(
-      'deferred_until >= NOW() AND deferred_until < ?',
+      'completed_at IS NULL AND deleted_at IS NULL AND deferred_until >= NOW() AND deferred_until < ?',
       2.days.from_now,
     )
   }
