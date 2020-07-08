@@ -14,4 +14,11 @@ class Todo < ApplicationRecord
       where('deferred_until > NOW()')
     end
   }
+
+  scope :tomorrow, -> {
+    where(
+      'deferred_until >= NOW() AND deferred_until < ?',
+      2.days.from_now,
+    )
+  }
 end
