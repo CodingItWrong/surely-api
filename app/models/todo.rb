@@ -11,7 +11,7 @@ class Todo < ApplicationRecord
     when :deleted
       where.not(deleted_at: nil)
     when :future
-      where('deferred_until > NOW()')
+      where('completed_at IS NULL AND deleted_at IS NULL AND deferred_until > NOW()')
     end
   }
 
