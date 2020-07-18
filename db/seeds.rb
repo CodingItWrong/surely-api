@@ -50,3 +50,6 @@ user.todos.create!(
   deferred_until: 1.day.from_now,
   deferred_at: 1.hour.ago,
 )
+
+# lots more todos
+50.times { user.todos.create! }
