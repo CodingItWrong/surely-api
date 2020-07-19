@@ -2,7 +2,7 @@
 
 require_relative 'null_paginator'
 
-class OptionalPaginator < JSONAPI::Paginator
+class OptionalPaginator < SimpleDelegator
   class << self
     attr_accessor :wrapped_class
 
@@ -15,8 +15,13 @@ class OptionalPaginator < JSONAPI::Paginator
 
   attr_reader :delegate
 
+  def self.requires_record_count
+    wrapped_class.requires_record_count
+  end
+
   def initialize(params)
-    @delegate = paginator_for_params(params).new(params)
+    inner_paginator = paginator_for_params(params).new(params)
+    super(inner_paginator)
   end
 
   def paginator_for_params(params)
@@ -25,9 +30,5 @@ class OptionalPaginator < JSONAPI::Paginator
     else
       self.class.wrapped_class
     end
-  end
-
-  def apply(relation, order_options)
-    delegate.apply(relation, order_options)
   end
 end
