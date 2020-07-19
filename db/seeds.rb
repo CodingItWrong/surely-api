@@ -52,5 +52,5 @@ user.todos.create!(
 )
 
 # lots more todos
-50.times { |i| user.todos.create!(name: "Completed #{i}", completed_at: 1.day.ago) }
-50.times { |i| user.todos.create!(name: "Deleted #{i}", deleted_at: 1.day.ago) }
+50.times { |i| user.todos.create!(name: "Completed #{i}", completed_at: i.days.ago) }
+50.times { |i| user.todos.create!(name: "Deleted #{i}", deleted_at: i.days.ago) }
