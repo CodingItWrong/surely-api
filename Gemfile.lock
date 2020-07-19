@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/codingitwrong/jsonapi-resources-optional_paginators.git
+  revision: cdaa1e5293235cfe47d4bd8676141c74bd1e663b
+  ref: cdaa1e5293235cfe47d4bd8676141c74bd1e663b
+  specs:
+    jsonapi-resources-optional_paginators (0.1.0)
+      jsonapi-resources
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -216,6 +224,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   jsonapi-resources
+  jsonapi-resources-optional_paginators!
   listen (>= 3.0.5, < 3.3)
   pg (>= 0.18, < 2.0)
   pry-rails
