@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class NullPaginator < JSONAPI::Paginator
-  def initialize(params)
-  end
+  def initialize(params); end
 
-  def apply(relation, order_options)
+  def apply(relation, _order_options)
     relation
   end
 
