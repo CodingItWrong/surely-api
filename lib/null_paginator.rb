@@ -8,7 +8,7 @@ class NullPaginator < JSONAPI::Paginator
     relation
   end
 
-  def links_page_params(_options = {})
-    {}
+  def calculate_page_count(_record_count)
+    1
   end
 end
