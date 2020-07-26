@@ -27,4 +27,8 @@ class TodoResource < ApplicationResource
       records.tomorrow
     end
   }
+
+  filter :search, apply: ->(records, value, _options) {
+    records.where('name ILIKE ?', "%#{value[0]}%")
+  }
 end
