@@ -18,8 +18,16 @@ class TodoResource < ApplicationResource
     user.todos
   end
 
-  filter :status, apply: ->(records, value, _options) {
-    records.status(value.first)
+  filter :status, apply: ->(records, values, _options) {
+    relation = records.status(values.first)
+
+    if (values.length > 1)
+      relation = values.drop(1).inject(relation) { |rel, value|
+        rel.or(records.status(value))
+      }
+    end
+
+    relation
   }
 
   filter :search, apply: ->(records, value, _options) {
