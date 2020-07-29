@@ -5,13 +5,13 @@ class Todo < ApplicationRecord
   scope :status, ->(status) {
     case status.to_sym
     when :available
-      where('completed_at IS NULL AND deleted_at IS NULL AND (deferred_until IS NULL OR deferred_until <= NOW())')
+      status(:open).where('deferred_until IS NULL OR deferred_until <= NOW()')
     when :completed
       where.not(completed_at: nil)
     when :deleted
       where.not(deleted_at: nil)
     when :future
-      where('completed_at IS NULL AND deleted_at IS NULL AND deferred_until > NOW()')
+      status(:open).where('deferred_until > NOW()')
     when :open
       where('completed_at IS NULL AND deleted_at IS NULL')
     end
