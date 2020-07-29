@@ -22,12 +22,6 @@ class TodoResource < ApplicationResource
     records.status(value.first)
   }
 
-  filter :deferred_until, apply: ->(records, value, _options) {
-    if value.first == 'tomorrow'
-      records.tomorrow
-    end
-  }
-
   filter :search, apply: ->(records, value, _options) {
     records.where('name ILIKE ?', "%#{value[0]}%")
   }

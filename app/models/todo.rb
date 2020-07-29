@@ -14,10 +14,8 @@ class Todo < ApplicationRecord
       status(:open).where('deferred_until > NOW()')
     when :open
       where('completed_at IS NULL AND deleted_at IS NULL')
+    when :tomorrow
+      status(:future).where('deferred_until < ?', 1.day.from_now)
     end
-  }
-
-  scope :tomorrow, -> {
-    status(:future).where('deferred_until < ?', 1.day.from_now)
   }
 end
