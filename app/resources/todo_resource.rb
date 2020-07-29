@@ -21,7 +21,7 @@ class TodoResource < ApplicationResource
   filter :status, apply: ->(records, values, _options) {
     relation = records.status(values.first)
 
-    if (values.length > 1)
+    if values.length > 1
       relation = values.drop(1).inject(relation) { |rel, value|
         rel.or(records.status(value))
       }
