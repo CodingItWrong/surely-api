@@ -18,6 +18,6 @@ class Todo < ApplicationRecord
   }
 
   scope :tomorrow, -> {
-    status(:future).where('deferred_until < ?', 2.days.from_now)
+    status(:future).where('deferred_until < ?', 1.day.from_now)
   }
 end
