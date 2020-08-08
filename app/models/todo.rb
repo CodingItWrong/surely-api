@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class Todo < ApplicationRecord
   belongs_to :user
+  belongs_to :category, required: false
 
   scope :status, ->(status) {
     case status.to_sym
