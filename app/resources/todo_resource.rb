@@ -2,6 +2,7 @@
 class TodoResource < ApplicationResource
   attributes :name, :notes, :created_at, :updated_at, :deleted_at, :completed_at, :deferred_at, :deferred_until
   has_one :user
+  has_one :category
 
   before_create { _model.user = current_user }
 

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   use_doorkeeper
   jsonapi_resources :users, only: %w[create]
   jsonapi_resources :todos
+  jsonapi_resources :categories
 end
