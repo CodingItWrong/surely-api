@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_114142) do
+ActiveRecord::Schema.define(version: 2020_08_08_120147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "sort_order"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
@@ -69,6 +78,8 @@ ActiveRecord::Schema.define(version: 2020_07_03_114142) do
     t.datetime "deferred_at", precision: 6
     t.datetime "deferred_until", precision: 6
     t.text "notes"
+    t.uuid "category_id"
+    t.index ["category_id"], name: "index_todos_on_category_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
@@ -80,7 +91,9 @@ ActiveRecord::Schema.define(version: 2020_07_03_114142) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "categories", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
+  add_foreign_key "todos", "categories"
 end
