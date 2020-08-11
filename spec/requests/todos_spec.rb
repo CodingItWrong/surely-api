@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'books', type: :request do
+RSpec.describe 'todos', type: :request do
   include_context 'with a logged in user'
 
   it 'allows retrieving all todos' do
