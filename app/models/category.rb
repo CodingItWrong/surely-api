@@ -8,7 +8,7 @@ class Category < ApplicationRecord
   private
 
   def set_default_values
-    max_sort_order = user.categories.maximum(:sort_order)
+    max_sort_order = user.categories.maximum(:sort_order) || 0
     self.sort_order ||= max_sort_order + 1
   end
 end
