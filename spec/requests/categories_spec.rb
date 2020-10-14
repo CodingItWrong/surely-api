@@ -33,7 +33,6 @@ RSpec.describe 'categories', type: :request do
       }
       post '/categories', headers: headers, params: body.to_json
 
-      puts response.body
       expect(response.status).to eq(201)
 
       response_body = JSON.parse(response.body)
