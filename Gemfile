@@ -4,7 +4,7 @@ ruby '2.7.2'
 
 gem 'rails', '~> 6.0.3'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.1'
 gem 'rack-cors'
 gem 'jsonapi-resources'
 gem 'jsonapi-resources-optional_paginators', github: 'codingitwrong/jsonapi-resources-optional_paginators', ref: 'cdaa1e5293235cfe47d4bd8676141c74bd1e663b'
