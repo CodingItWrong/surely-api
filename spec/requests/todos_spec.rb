@@ -6,14 +6,14 @@ RSpec.describe 'todos', type: :request do
   include_context 'with a logged in user'
 
   it 'allows retrieving all todos' do
-    todos = FactoryBot.create_list(:todo, 3, user: user)
+    todo = FactoryBot.create(:todo, user: user)
 
-    get '/todos?sort=name', headers: headers
+    get '/todos', headers: headers
 
     expect(response.status).to eq(200)
 
     response_body = JSON.parse(response.body)
-    expect(response_body['data'].count).to eq(3)
-    expect(response_body['data'][0]['attributes']['name']).to eq(todos[0].name)
+    expect(response_body['data'].count).to eq(1)
+    expect(response_body['data'][0]['attributes']['name']).to eq(todo.name)
   end
 end
