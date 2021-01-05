@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'todos', type: :request do
   include_context 'with a logged in user'
 
-  JSON_API_CONTENT_TYPE = 'application/vnd.api+json'
+  json_api_content_type = 'application/vnd.api+json'
 
   def time_string(time)
     time.iso8601(3)
@@ -135,7 +135,7 @@ RSpec.describe 'todos', type: :request do
       end
 
       it 'has json:api content type' do
-        expect(response.headers['Content-Type']).to eq(JSON_API_CONTENT_TYPE)
+        expect(response.headers['Content-Type']).to eq(json_api_content_type)
       end
 
       it 'includes all todo attributes' do
@@ -156,14 +156,14 @@ RSpec.describe 'todos', type: :request do
 
     describe 'category relationship' do
       let!(:category) { FactoryBot.create(:category, user: user) }
-      let!(:category_todo_1) {
+      let!(:category_todo1) {
         FactoryBot.create(
           :todo,
           user: user,
           category: category,
         )
       }
-      let!(:category_todo_2) {
+      let!(:category_todo2) {
         FactoryBot.create(
           :todo,
           user: user,
@@ -183,7 +183,7 @@ RSpec.describe 'todos', type: :request do
 
       it 'includes category relationship when present' do
         record = body['data'].find { |r|
-          r['id'] == category_todo_1.id
+          r['id'] == category_todo1.id
         }
 
         expect(record['relationships']).to include(
@@ -191,8 +191,8 @@ RSpec.describe 'todos', type: :request do
             'data' => {
               'type' => 'categories',
               'id' => category.id,
-            }
-          )
+            },
+          ),
         )
       end
 
@@ -203,21 +203,21 @@ RSpec.describe 'todos', type: :request do
 
         expect(record['relationships']).to include(
           'category' => a_hash_including(
-            'data' => nil
-          )
+            'data' => nil,
+          ),
         )
       end
 
       it 'includes category' do
         expect(body['included']).to match_array([
-          a_hash_including({
+          a_hash_including(
             'type' => 'categories',
             'id' => category.id,
-            'attributes' => a_hash_including({
+            'attributes' => a_hash_including(
               'name' => category.name,
               'sort-order' => category.sort_order,
-            }),
-          }),
+            ),
+          ),
         ])
       end
     end

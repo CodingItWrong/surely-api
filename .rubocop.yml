@@ -48,3 +48,6 @@ Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 Style/TrailingCommaInHashLiteral:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 20

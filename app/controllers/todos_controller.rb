@@ -3,7 +3,7 @@ class TodosController < ApplicationController
   before_action :doorkeeper_authorize!
 
   def index
-    if is_available_or_tomorrow?
+    if available_or_tomorrow?
       todos = Todo.status(:available).or(Todo.status(:tomorrow))
       headers['Content-Type'] = 'application/vnd.api+json'
       render json: serialize_todos(todos)
@@ -14,15 +14,16 @@ class TodosController < ApplicationController
 
   private
 
-  def is_available_or_tomorrow?
+  def available_or_tomorrow?
     params[:filter] && params[:filter][:status] == 'available,tomorrow' && params[:include] == 'category'
   end
 
   def serialize_todos(todos)
     {
       data: todos.map { |r| serialize_todo(r) },
-      included: included_categories(todos)
-                  .map { |r| serialize_category(r) },
+      included:
+        included_categories(todos)
+          .map { |r| serialize_category(r) },
       meta: {'page-count': 1},
     }
   end
@@ -31,29 +32,29 @@ class TodosController < ApplicationController
     todos.map(&:category).compact.uniq
   end
 
-  def serialize_todo(r)
+  def serialize_todo(todo)
     {
       type: 'todos',
-      id: r.id,
+      id: todo.id,
       attributes: serialize_attributes(
-        record: r,
-        attributes: %i(name notes created_at updated_at deferred_at deferred_until),
+        record: todo,
+        attributes: %i[name notes created_at updated_at deferred_at deferred_until],
       ),
       relationships: {
         category: {
-          data: r.category && {type: 'categories', id: r.category.id},
+          data: todo.category && {type: 'categories', id: todo.category.id},
         },
       },
     }
   end
 
-  def serialize_category(r)
+  def serialize_category(category)
     {
       type: 'categories',
-      id: r.id,
+      id: category.id,
       attributes: serialize_attributes(
-        record: r,
-        attributes: %i(name sort_order),
+        record: category,
+        attributes: %i[name sort_order],
       ),
     }
   end
