@@ -243,7 +243,7 @@ DEPENDENCIES
   rubocop
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.0.0p137
 
 BUNDLED WITH
    2.2.4
