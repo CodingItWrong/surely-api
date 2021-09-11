@@ -31,6 +31,22 @@ class TodoResource < ApplicationResource
     relation
   }
 
+  filter :completed_at, apply: ->(records, values, _options) {
+    if values == ['null']
+      records.where(completed_at: nil)
+    else
+      'HIHIHI'
+    end
+  }
+
+  filter :deleted_at, apply: ->(records, values, _options) {
+    if values == ['null']
+      records.where(deleted_at: nil)
+    else
+      'HIHIHI'
+    end
+  }
+
   filter :search, apply: ->(records, value, _options) {
     records.where('name ILIKE ?', "%#{value[0]}%")
   }
