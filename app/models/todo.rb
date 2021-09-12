@@ -3,6 +3,8 @@ class Todo < ApplicationRecord
   belongs_to :user
   belongs_to :category, required: false
 
+  validates :name, presence: true
+
   scope :status, ->(status) {
     case status.to_sym
     when :available
