@@ -35,7 +35,7 @@ class TodoResource < ApplicationResource
     if values == ['null']
       records.where(completed_at: nil)
     else
-      'HIHIHI'
+      records
     end
   }
 
@@ -43,7 +43,15 @@ class TodoResource < ApplicationResource
     if values == ['null']
       records.where(deleted_at: nil)
     else
-      'HIHIHI'
+      records
+    end
+  }
+
+  filter :deferred_until, apply: ->(records, values, _options) {
+    if values == ['null']
+      records.where(deferred_until: nil)
+    else
+      records
     end
   }
 
