@@ -1,8 +1,8 @@
 # Surely
 
-API for a todo list application.
+Official backend for the Surely todo app. A JSON:API-compliant web service implmented in Ruby on Rails.
 
-Frontend is handled by [surely-ember](https://github.com/CodingItWrong/surely-ember).
+The official frontend is [surely-expo](https://github.com/CodingItWrong/surely-expo). If you'd like to host your own backend, you will need to make your own build of the client to point to it.
 
 ## Getting Started
 
