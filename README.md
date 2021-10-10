@@ -8,7 +8,7 @@ The official frontend is [surely-expo](https://github.com/CodingItWrong/surely-e
 
 ### Requirements
 
-1. Ruby
+1. Ruby 3.0.2
 1. PostgreSQL (e.g. [Postgres.app][postgres-app])
 
 ### Setup
