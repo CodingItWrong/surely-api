@@ -19,7 +19,7 @@ $ rails db:setup
 ## Running
 
 ```bash
-$ rails s
+$ bin/serve
 ```
 
 ## Development
