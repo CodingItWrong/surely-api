@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '3.0.3'
 
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 7.0.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.5'
 gem 'rack-cors'
