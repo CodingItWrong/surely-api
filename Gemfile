@@ -12,6 +12,7 @@ gem 'bcrypt'
 gem 'doorkeeper'
 gem 'dotenv-rails'
 gem 'nokogiri', '>= 1.11.0.rc4'
+gem 'net-smtp'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.8'
