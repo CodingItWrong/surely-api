@@ -35,5 +35,7 @@ module Surely
     config.api_only = true
 
     config.autoloader = :classic
+
+    config.active_record.legacy_connection_handling = false
   end
 end
