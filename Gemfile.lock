@@ -100,7 +100,7 @@ GEM
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     io-wait (0.2.1)
-    jsonapi-resources (0.10.5)
+    jsonapi-resources (0.10.6)
       activerecord (>= 4.1)
       concurrent-ruby
       railties (>= 4.1)
