@@ -7,8 +7,8 @@ RSpec.describe 'categories', type: :request do
 
   describe 'creating' do
     it 'sets the sort order to one more than the max' do
-      FactoryBot.create(:category, user: user, sort_order: 1)
-      FactoryBot.create(:category, user: user, sort_order: 3)
+      create(:category, user: user, sort_order: 1)
+      create(:category, user: user, sort_order: 3)
 
       body = {
         data: {
