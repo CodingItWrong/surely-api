@@ -6,7 +6,7 @@ RSpec.describe 'todos', type: :request do
   include_context 'with a logged in user'
 
   it 'allows retrieving all todos' do
-    todo = FactoryBot.create(:todo, user: user)
+    todo = create(:todo, user: user)
 
     get '/todos', headers: headers
 
@@ -18,8 +18,8 @@ RSpec.describe 'todos', type: :request do
   end
 
   it 'allows sorting todos' do
-    older_todo = FactoryBot.create(:todo, user: user, completed_at: 2.days.ago)
-    newer_todo = FactoryBot.create(:todo, user: user, completed_at: 1.day.ago)
+    older_todo = create(:todo, user: user, completed_at: 2.days.ago)
+    newer_todo = create(:todo, user: user, completed_at: 1.day.ago)
 
     get '/todos?sort=-completedAt', headers: headers
 
