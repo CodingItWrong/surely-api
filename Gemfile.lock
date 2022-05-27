@@ -216,6 +216,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.18.0)
       parser (>= 3.1.1.0)
+    rubocop-rails (2.14.2)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
     strscan (3.0.2)
     thor (1.2.1)
@@ -251,6 +255,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop
+  rubocop-rails
 
 RUBY VERSION
    ruby 3.1.2p20

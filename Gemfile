@@ -22,7 +22,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'coderay'
-  gem 'rubocop'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :test do
