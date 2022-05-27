@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class Todo < ApplicationRecord
   belongs_to :user
-  belongs_to :category, required: false
+  belongs_to :category, optional: true
 
   validates :name, presence: true
 
