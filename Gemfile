@@ -16,14 +16,14 @@ gem 'net-smtp'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.8'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'coderay'
-  gem 'rubocop', require: false
-  gem 'rubocop-rails', require: false
 end
 
 group :test do
