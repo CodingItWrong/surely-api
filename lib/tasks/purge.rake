@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :purge do
-  task :josh => [:environment] do
+  task josh: [:environment] do
     josh_email = 'josh@joshjustice.com'
     completed_day_limit = 30
 
