@@ -4,6 +4,7 @@ require: rubocop-rails
 AllCops:
   TargetRubyVersion: 3.0
   Exclude:
+    - '.irbrc'
     - 'bin/**/*'
     - 'config/**/*'
     - 'config.ru'
