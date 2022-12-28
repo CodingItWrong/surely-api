@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class CategoryResource < ApplicationResource
   attributes :name, :sort_order
   has_one :user
