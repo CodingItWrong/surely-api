@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'optional_paged_paginator'
+
+require "optional_paged_paginator"
 
 JSONAPI.configure do |config|
   config.resource_key_type = :uuid
