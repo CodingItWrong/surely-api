@@ -16,8 +16,7 @@ gem 'net-smtp'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.8'
-  gem 'rubocop', require: false
-  gem 'rubocop-rails', require: false
+  gem 'standard'
 end
 
 group :development, :test do
