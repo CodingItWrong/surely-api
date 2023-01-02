@@ -11,7 +11,7 @@ gem "jsonapi-resources-optional_paginators", github: "codingitwrong/jsonapi-reso
 gem "bcrypt"
 gem "doorkeeper"
 gem "dotenv-rails"
-gem "nokogiri", ">= 1.11.0.rc4"
+gem "nokogiri"
 gem "net-smtp"
 
 group :development do
