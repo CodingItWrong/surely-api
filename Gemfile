@@ -15,7 +15,7 @@ gem "nokogiri"
 gem "net-smtp"
 
 group :development do
-  gem "listen", ">= 3.0.5", "< 3.9"
+  gem "listen", ">= 3.0.5", "< 3.10"
   gem "standard"
 end
 
