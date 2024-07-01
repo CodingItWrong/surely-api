@@ -94,7 +94,7 @@ GEM
     crass (1.0.6)
     date (3.3.4)
     diff-lcs (1.5.1)
-    doorkeeper (5.7.0)
+    doorkeeper (5.7.1)
       railties (>= 5)
     dotenv (3.1.2)
     dotenv-rails (3.1.2)
