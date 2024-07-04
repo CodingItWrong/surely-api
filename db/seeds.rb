@@ -2,16 +2,25 @@
 
 user = User.create!(email: "example@example.com", password: "password")
 
+# categories
+work = user.categories.create!(name: "Work", sort_order: 0)
+after_work = user.categories.create!(name: "After Work", sort_order: 1)
+
 # available
 user.todos.create!(
-  name: "Yesterday Todo",
-  created_at: 3.days.ago,
-  deferred_until: 1.day.ago,
+  name: "Submit time sheet",
+  category: work
+)
+user.todos.create!(
+  name: "Clean up the house",
+  notes: "Clean off countertops, pick up kids' toys",
+  category: after_work,
+  deferred_until: 0.days.ago,
   deferred_at: 2.days.ago
 )
 user.todos.create!(
-  name: "Simple Todo",
-  created_at: 1.day.ago
+  name: "Get groceries",
+  category: after_work
 )
 
 # completed
