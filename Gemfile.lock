@@ -289,7 +289,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   coderay
-  csv (~> 3.3)
+  csv
   doorkeeper
   dotenv-rails
   factory_bot_rails
@@ -298,7 +298,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.10)
   net-smtp
   nokogiri
-  ostruct (~> 0.6.0)
+  ostruct
   pg (>= 0.18, < 2.0)
   pry-rails
   puma (~> 6.4)
