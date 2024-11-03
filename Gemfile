@@ -13,6 +13,8 @@ gem "doorkeeper"
 gem "dotenv-rails"
 gem "nokogiri"
 gem "net-smtp"
+gem "csv"
+gem "ostruct"
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.10"
