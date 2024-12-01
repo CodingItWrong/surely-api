@@ -4,7 +4,7 @@ ruby(File.read(".ruby-version").chomp)
 
 gem "rails", "~> 8.0.0"
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 6.4"
+gem "puma", "~> 6.5"
 gem "rack-cors"
 gem "jsonapi-resources"
 gem "jsonapi-resources-optional_paginators", github: "codingitwrong/jsonapi-resources-optional_paginators", ref: "cdaa1e5293235cfe47d4bd8676141c74bd1e663b"
