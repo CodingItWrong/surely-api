@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby(File.read(".ruby-version").chomp)
 
-gem "rails", "~> 8.0.2"
+gem "rails", "~> 8.1.0"
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma", "~> 7.1"
 gem "rack-cors"
