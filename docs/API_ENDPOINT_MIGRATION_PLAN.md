@@ -199,11 +199,11 @@ For each endpoint, ensure comprehensive test coverage including:
 
 ## Categories
 
-- [ ] `GET /categories` - List all categories
-- [ ] `GET /categories/{id}` - Get category by ID
-- [ ] `POST /categories` - Create category
-- [ ] `PATCH /categories/{id}` - Update category
-- [ ] `DELETE /categories/{id}` - Delete category (hard delete)
+- [x] `GET /categories` - List all categories ✅ **MIGRATED**
+- [x] `GET /categories/{id}` - Get category by ID ✅ **MIGRATED**
+- [x] `POST /categories` - Create category ✅ **MIGRATED**
+- [x] `PATCH /categories/{id}` - Update category ✅ **MIGRATED**
+- [x] `DELETE /categories/{id}` - Delete category (hard delete) ✅ **MIGRATED**
 
 **Notes:**
 - **Attributes**: `name` (string), `sort-order` (number for display ordering)
@@ -212,7 +212,20 @@ For each endpoint, ensure comprehensive test coverage including:
 - **Hard delete**: Unlike todos, categories support DELETE (hard delete)
 - **No query parameters**: Categories endpoint doesn't use filters, includes, or pagination
 
-**Test Coverage**: ⏳ Not started
+**Migration Status**: ✅ **COMPLETE**
+- **Phase 1**: 66 comprehensive tests written in [spec/requests/categories_spec.rb](../spec/requests/categories_spec.rb)
+- **Phase 2**: Reimplemented in [app/controllers/categories_controller.rb](../app/controllers/categories_controller.rb)
+- All 66 tests passing with new implementation
+- No longer depends on jsonapi-resources gem
+- Routes updated to use standard Rails routing
+
+**Implementation Details**:
+- Inherits from [JsonapiController](../app/controllers/jsonapi_controller.rb) base class with JSON:API helpers
+- Controller directly serializes JSON:API response format
+- Proper authentication with `doorkeeper_authorize!`
+- User scoping enforced via `current_user.categories`
+- Database constraint handling (500 status for NOT NULL violations)
+- Auto-generated `sort_order` via model `before_create` callback
 
 ---
 
@@ -232,9 +245,9 @@ For each endpoint, ensure comprehensive test coverage including:
 - **DELETE**: 1 endpoint (Delete Category)
 
 #### By Completion Status:
-- **Completed**: 1 (Users endpoint)
+- **Completed**: 6 (Users endpoint + 5 Categories endpoints)
 - **In Progress**: 0
-- **Not Started**: 10
+- **Not Started**: 5 (Todos endpoints)
 
 ---
 
