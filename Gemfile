@@ -4,7 +4,7 @@ ruby(File.read(".ruby-version").chomp)
 
 gem "rails", "~> 8.1.2"
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 7.1"
+gem "puma", "~> 7.2"
 gem "rack-cors"
 gem "bcrypt"
 gem "doorkeeper"
