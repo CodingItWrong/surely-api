@@ -3,6 +3,6 @@
 Rails.application.routes.draw do
   use_doorkeeper
   resources :users, only: [:create]
-  jsonapi_resources :todos
+  resources :todos, except: [:new, :edit]
   resources :categories
 end
