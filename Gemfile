@@ -15,7 +15,7 @@ gem "csv"
 gem "ostruct"
 
 group :development do
-  gem "listen", ">= 3.0.5", "< 3.10"
+  gem "listen", ">= 3.0.5", "< 3.11"
   gem "standard"
 end
 
