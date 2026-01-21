@@ -34,7 +34,7 @@ RSpec.describe "users", type: :request do
       it "returns JSON:API formatted response" do
         post "/users", headers: json_api_headers, params: valid_attributes.to_json
 
-        expect(response.content_type).to eq("application/vnd.api+json")
+        expect(response.content_type).to match(%r{application/vnd\.api\+json})
 
         response_body = JSON.parse(response.body)
         expect(response_body).to have_key("data")
@@ -133,8 +133,7 @@ RSpec.describe "users", type: :request do
 
         post "/users", headers: json_api_headers, params: body.to_json
 
-        # Known issue with Rack version: status is 0 instead of proper error code
-        expect(response.status).to eq(0)
+        expect(response.status).to eq(422)
       end
 
       it "returns JSON:API error structure when email is missing" do
@@ -169,8 +168,7 @@ RSpec.describe "users", type: :request do
 
         post "/users", headers: json_api_headers, params: body.to_json
 
-        # Known issue with Rack version: status is 0 instead of proper error code
-        expect(response.status).to eq(0)
+        expect(response.status).to eq(422)
       end
 
       it "returns JSON:API error structure when password is missing" do
@@ -205,8 +203,7 @@ RSpec.describe "users", type: :request do
 
         post "/users", headers: json_api_headers, params: body.to_json
 
-        # Known issue with Rack version: status is 0 instead of proper error code
-        expect(response.status).to eq(0)
+        expect(response.status).to eq(422)
       end
 
       it "returns JSON:API error structure when email is already taken" do
@@ -387,7 +384,7 @@ RSpec.describe "users", type: :request do
 
         post "/users", headers: json_api_headers, params: body.to_json
 
-        expect(response.content_type).to eq("application/vnd.api+json")
+        expect(response.content_type).to match(%r{application/vnd\.api\+json})
       end
     end
   end

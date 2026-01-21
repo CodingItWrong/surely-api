@@ -104,17 +104,25 @@ For each endpoint, ensure comprehensive test coverage including:
 
 ## Users
 
-- [ ] `POST /users` - Create user (sign up)
+- [x] `POST /users` - Create user (sign up) ✅ **MIGRATED**
 
 **Notes:**
 - This is a public endpoint (no authentication required)
 - The client may send an empty Bearer token when unauthenticated
 - **Attributes**: `email` (string), `password` (string)
 
-**Test Coverage**: ✅ Phase 1 Complete (24 tests passing)
-- Comprehensive tests written in [spec/requests/users_spec.rb](../spec/requests/users_spec.rb)
-- All tests pass with current jsonapi-resources implementation
-- Ready for Phase 2 (reimplementation)
+**Migration Status**: ✅ **COMPLETE**
+- **Phase 1**: 24 comprehensive tests written in [spec/requests/users_spec.rb](../spec/requests/users_spec.rb)
+- **Phase 2**: Reimplemented in [app/controllers/users_controller.rb](../app/controllers/users_controller.rb)
+- All 24 tests passing with new implementation
+- No longer depends on jsonapi-resources gem
+- Routes updated to use standard Rails routing
+
+**Implementation Details**:
+- Created [JsonapiController](../app/controllers/jsonapi_controller.rb) base class with helpers for JSON:API format
+- Controller directly serializes JSON:API response format
+- Proper validation error handling (422 status with JSON:API error structure)
+- Improved behavior: validation errors now return proper 422 status instead of 0
 
 ---
 
@@ -224,9 +232,9 @@ For each endpoint, ensure comprehensive test coverage including:
 - **DELETE**: 1 endpoint (Delete Category)
 
 #### By Completion Status:
-- **Completed**: 0
+- **Completed**: 1 (Users endpoint)
 - **In Progress**: 0
-- **Not Started**: 11
+- **Not Started**: 10
 
 ---
 
