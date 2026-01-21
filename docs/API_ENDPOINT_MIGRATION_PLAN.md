@@ -128,72 +128,49 @@ For each endpoint, ensure comprehensive test coverage including:
 
 ## Todos
 
-### List Todos (with various filters)
-
-- [ ] `GET /todos?filter[status]=available&include=category` - Available todos
-- [ ] `GET /todos?filter[status]=tomorrow&include=category` - Tomorrow todos
-- [ ] `GET /todos?filter[status]=future&filter[search]={text}&sort=name&include=category` - Future todos with search
-- [ ] `GET /todos?filter[status]=completed&filter[search]={text}&sort=-completedAt&page[number]={n}&include=category` - Completed todos with pagination
-- [ ] `GET /todos?filter[status]=deleted&filter[search]={text}&sort=-deletedAt&page[number]={n}&include=category` - Deleted todos with pagination
+- [x] `GET /todos` - List todos with filtering, sorting, pagination, includes ✅ **MIGRATED**
+- [x] `GET /todos/{id}` - Get todo by ID ✅ **MIGRATED**
+- [x] `POST /todos` - Create todo ✅ **MIGRATED**
+- [x] `PATCH /todos/{id}` - Update todo ✅ **MIGRATED**
+- [x] `DELETE /todos/{id}` - Delete todo (hard delete) ✅ **MIGRATED**
 
 **Notes:**
 - **Status values**: `available`, `tomorrow`, `future`, `completed`, `deleted`
 - **Attributes**: `name` (string), `notes` (string), `completed-at` (datetime or null), `deleted-at` (datetime or null), `deferred-until` (date string or null)
 - **Relationships**: `category` (belongs to category, optional/nullable)
+- **Query Parameters**:
+  - `filter[status]`: Filter by status (available, tomorrow, future, completed, deleted)
+  - `filter[search]`: Text search on todo names
+  - `sort`: Sort by field (name, completedAt, deletedAt) with `-` prefix for descending
+  - `page[number]`: Pagination (only for completed and deleted status)
+  - `include`: Include related resources (category)
 - **Include parameter**: When `include=category` is present:
-  - Response must include `included` array at top level (sibling to `data`)
-  - Each included category resource has: `type: "categories"`, `id`, `attributes: {name, sort-order}`
+  - Response includes `included` array at top level (sibling to `data`)
+  - Each included category has: `type: "categories"`, `id`, `attributes: {name, sort-order}`
   - Todo's `relationships.category.data` contains `{type: "categories", id: "123"}` or `null`
   - Multiple todos can reference the same category (should only appear once in `included`)
 - **Pagination**:
   - Used only for `completed` and `deleted` status
   - Response includes `meta['page-count']` with total page count
-  - Uses `page[number]` parameter (starts at 1)
-- **Search**: Uses `filter[search]` parameter for text search
-- **Sort**: Supports `name`, `-completedAt` (descending completed), `-deletedAt` (descending deleted)
+  - Uses `page[number]` parameter (starts at 1), page size is 10
+- **Hard delete**: DELETE endpoint performs hard delete (removes from database)
 
-**Test Coverage**: ⏳ Not started
+**Migration Status**: ✅ **COMPLETE**
+- **Phase 1**: 123 comprehensive tests written in [spec/requests/todos_spec.rb](../spec/requests/todos_spec.rb)
+- **Phase 2**: Reimplemented in [app/controllers/todos_controller.rb](../app/controllers/todos_controller.rb)
+- All 123 tests passing with new implementation
+- No longer depends on jsonapi-resources gem
+- Routes updated to use standard Rails routing
 
-### Get Single Todo
-
-- [ ] `GET /todos/{id}?include=category` - Get todo by ID
-
-**Notes:**
-- Supports `include=category` parameter (see include notes above)
-- Returns 404 if todo doesn't belong to authenticated user
-
-**Test Coverage**: ⏳ Not started
-
-### Create Todo
-
-- [ ] `POST /todos` - Create todo
-
-**Notes:**
-- **Required attributes**: `name` (string)
-- **Optional attributes**: `deferred-until` (ISO 8601 date string)
-- **Optional relationships**: `category` (reference to categories resource)
-- **Default values**: `completed-at: null`, `deleted-at: null`
-- Used to create both available todos (no `deferred-until`) and tomorrow/future todos (with `deferred-until`)
-
-**Test Coverage**: ⏳ Not started
-
-### Update Todo
-
-- [ ] `PATCH /todos/{id}` - Update todo
-
-**Notes:**
-- **Updatable attributes**: `name`, `notes`, `deferred-until`, `completed-at`, `deleted-at`
-- **Updatable relationships**: `category` (can be set to null to remove category)
-- **Common update patterns**:
-  - **Edit form**: Updates `name`, `notes`, `deferred-until`, and `category` relationship
-  - **Mark complete**: Sets `completed-at` to current datetime (ISO 8601 string)
-  - **Mark incomplete**: Sets `completed-at` to null
-  - **Soft delete**: Sets `deleted-at` to current datetime (ISO 8601 string)
-  - **Undelete**: Sets both `deleted-at` and `completed-at` to null
-  - **Defer**: Sets `deferred-until` to a future date (ISO 8601 date string)
-- **No hard delete**: There is no DELETE endpoint; todos are soft-deleted only
-
-**Test Coverage**: ⏳ Not started
+**Implementation Details**:
+- Inherits from [JsonapiController](../app/controllers/jsonapi_controller.rb) base class with JSON:API helpers
+- Controller directly serializes JSON:API response format
+- Proper authentication with `doorkeeper_authorize!`
+- User scoping enforced via `current_user.todos`
+- Status filtering uses model scopes from [app/models/todo.rb](../app/models/todo.rb)
+- Implements complex query parameter handling (filtering, searching, sorting, pagination, includes)
+- Proper relationship handling for category associations
+- Improved behavior: validation errors now return proper 422 status instead of 0
 
 ---
 
@@ -231,23 +208,30 @@ For each endpoint, ensure comprehensive test coverage including:
 
 ## Migration Progress Summary
 
-### Total JSON:API Endpoints: 11 endpoint patterns
+### Total JSON:API Endpoints: 12 endpoints
 
 #### By Resource:
-- **Users**: 1 endpoint (Create)
-- **Todos**: 7 endpoint patterns (5 filtered list variants, 1 get, 1 create, 1 update)
-- **Categories**: 5 endpoints (List, Get, Create, Update, Delete)
+- **Users**: 1 endpoint (Create) ✅ **COMPLETE**
+- **Todos**: 5 endpoints (List, Get, Create, Update, Delete) ✅ **COMPLETE**
+- **Categories**: 5 endpoints (List, Get, Create, Update, Delete) ✅ **COMPLETE**
 
 #### By HTTP Method:
-- **GET**: 7 patterns (5 todo list variants, 1 single todo, 1 categories list, 1 single category)
-- **POST**: 2 endpoints (Create User, Create Todo, Create Category)
-- **PATCH**: 2 endpoints (Update Todo, Update Category)
-- **DELETE**: 1 endpoint (Delete Category)
+- **GET**: 3 endpoints (List + Get for Todos and Categories) ✅ **COMPLETE**
+- **POST**: 3 endpoints (Create User, Create Todo, Create Category) ✅ **COMPLETE**
+- **PATCH**: 2 endpoints (Update Todo, Update Category) ✅ **COMPLETE**
+- **DELETE**: 2 endpoints (Delete Todo, Delete Category) ✅ **COMPLETE**
 
 #### By Completion Status:
-- **Completed**: 6 (Users endpoint + 5 Categories endpoints)
+- **Completed**: 12 (All endpoints) ✅ **100% COMPLETE**
 - **In Progress**: 0
-- **Not Started**: 5 (Todos endpoints)
+- **Not Started**: 0
+
+### Migration Complete! 🎉
+
+All JSON:API endpoints have been successfully migrated away from the jsonapi-resources gem to custom implementations. The codebase no longer depends on the jsonapi-resources library for any JSON:API endpoints.
+
+**Total Test Coverage**: 213 tests (24 Users + 66 Categories + 123 Todos)
+**All tests passing**: ✅
 
 ---
 

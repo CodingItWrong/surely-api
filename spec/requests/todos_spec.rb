@@ -1077,7 +1077,7 @@ RSpec.describe "todos", type: :request do
         expect(response.status).to eq(400)
       end
 
-      it "returns validation error when name is missing" do
+      it "returns 422 when name is missing" do
         post "/todos", headers: headers, params: {
           data: {
             type: "todos",
@@ -1087,8 +1087,7 @@ RSpec.describe "todos", type: :request do
           }
         }.to_json
 
-        # Current implementation returns status 0 for validation errors (a bug)
-        expect(response.status).to eq(0)
+        expect(response.status).to eq(422)
       end
 
       it "returns JSON:API error structure for validation errors" do
@@ -1511,7 +1510,7 @@ RSpec.describe "todos", type: :request do
         expect(response.status).to eq(400)
       end
 
-      it "returns validation error when name is set to empty" do
+      it "returns 422 when name is set to empty" do
         todo = create(:todo, user: user, name: "Original")
 
         patch "/todos/#{todo.id}", headers: headers, params: {
@@ -1524,8 +1523,7 @@ RSpec.describe "todos", type: :request do
           }
         }.to_json
 
-        # Current implementation returns status 0 for validation errors (a bug)
-        expect(response.status).to eq(0)
+        expect(response.status).to eq(422)
       end
 
       it "returns JSON:API error structure for validation errors" do
