@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class CategoriesController < ApplicationController
+class CategoriesController < JsonapiResourcesController
   before_action :doorkeeper_authorize!
 end
