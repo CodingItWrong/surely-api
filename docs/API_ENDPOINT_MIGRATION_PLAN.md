@@ -156,9 +156,9 @@ For each endpoint, ensure comprehensive test coverage including:
 - **Hard delete**: DELETE endpoint performs hard delete (removes from database)
 
 **Migration Status**: ✅ **COMPLETE**
-- **Phase 1**: 123 comprehensive tests written in [spec/requests/todos_spec.rb](../spec/requests/todos_spec.rb)
+- **Phase 1**: 126 comprehensive tests written in [spec/requests/todos_spec.rb](../spec/requests/todos_spec.rb)
 - **Phase 2**: Reimplemented in [app/controllers/todos_controller.rb](../app/controllers/todos_controller.rb)
-- All 123 tests passing with new implementation
+- All 126 tests passing with new implementation
 - No longer depends on jsonapi-resources gem
 - Routes updated to use standard Rails routing
 
@@ -230,7 +230,7 @@ For each endpoint, ensure comprehensive test coverage including:
 
 All JSON:API endpoints have been successfully migrated away from the jsonapi-resources gem to custom implementations. The codebase no longer depends on the jsonapi-resources library for any JSON:API endpoints.
 
-**Total Test Coverage**: 213 tests (24 Users + 66 Categories + 123 Todos)
+**Total Test Coverage**: 216 tests (24 Users + 66 Categories + 126 Todos)
 **All tests passing**: ✅
 
 ---
