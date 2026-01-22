@@ -1018,6 +1018,47 @@ RSpec.describe "todos", type: :request do
         expect(created_todo.category_id).to eq(category.id)
       end
 
+      it "returns relationships in response when creating todo with category" do
+        category = create(:category, user: user)
+
+        post "/todos", headers: headers, params: {
+          data: {
+            type: "todos",
+            attributes: {
+              name: "Todo with category"
+            },
+            relationships: {
+              category: {
+                data: {
+                  type: "categories",
+                  id: category.id
+                }
+              }
+            }
+          }
+        }.to_json
+
+        response_body = JSON.parse(response.body)
+        expect(response_body["data"]).to have_key("relationships")
+        expect(response_body["data"]["relationships"]["category"]["data"]["type"]).to eq("categories")
+        expect(response_body["data"]["relationships"]["category"]["data"]["id"]).to eq(category.id)
+      end
+
+      it "returns relationships with null data when creating todo without category" do
+        post "/todos", headers: headers, params: {
+          data: {
+            type: "todos",
+            attributes: {
+              name: "Todo without category"
+            }
+          }
+        }.to_json
+
+        response_body = JSON.parse(response.body)
+        expect(response_body["data"]).to have_key("relationships")
+        expect(response_body["data"]["relationships"]["category"]["data"]).to be_nil
+      end
+
       it "creates todo without category (null relationship)" do
         post "/todos", headers: headers, params: {
           data: {
@@ -1413,6 +1454,69 @@ RSpec.describe "todos", type: :request do
 
         response_body = JSON.parse(response.body)
         expect(response_body["data"]["attributes"]["name"]).to eq("New Name")
+      end
+
+      it "returns relationships in response when updating category" do
+        category = create(:category, user: user)
+        todo = create(:todo, user: user, category: nil)
+
+        patch "/todos/#{todo.id}", headers: headers, params: {
+          data: {
+            type: "todos",
+            id: todo.id,
+            relationships: {
+              category: {
+                data: {
+                  type: "categories",
+                  id: category.id
+                }
+              }
+            }
+          }
+        }.to_json
+
+        response_body = JSON.parse(response.body)
+        expect(response_body["data"]).to have_key("relationships")
+        expect(response_body["data"]["relationships"]["category"]["data"]["type"]).to eq("categories")
+        expect(response_body["data"]["relationships"]["category"]["data"]["id"]).to eq(category.id)
+      end
+
+      it "returns relationships in response when updating attributes" do
+        category = create(:category, user: user)
+        todo = create(:todo, user: user, name: "Old Name", category: category)
+
+        patch "/todos/#{todo.id}", headers: headers, params: {
+          data: {
+            type: "todos",
+            id: todo.id,
+            attributes: {
+              name: "New Name"
+            }
+          }
+        }.to_json
+
+        response_body = JSON.parse(response.body)
+        expect(response_body["data"]).to have_key("relationships")
+        expect(response_body["data"]["relationships"]["category"]["data"]["type"]).to eq("categories")
+        expect(response_body["data"]["relationships"]["category"]["data"]["id"]).to eq(category.id)
+      end
+
+      it "returns relationships with null data when todo has no category" do
+        todo = create(:todo, user: user, name: "Old Name", category: nil)
+
+        patch "/todos/#{todo.id}", headers: headers, params: {
+          data: {
+            type: "todos",
+            id: todo.id,
+            attributes: {
+              name: "New Name"
+            }
+          }
+        }.to_json
+
+        response_body = JSON.parse(response.body)
+        expect(response_body["data"]).to have_key("relationships")
+        expect(response_body["data"]["relationships"]["category"]["data"]).to be_nil
       end
 
       it "returns 404 when todo doesn't exist" do

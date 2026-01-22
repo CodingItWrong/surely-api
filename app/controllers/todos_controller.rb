@@ -110,7 +110,7 @@ class TodosController < JsonapiController
     end
 
     if todo.save
-      render json: {data: serialize_todo(todo)}, status: :created, content_type: jsonapi_content_type
+      render json: {data: serialize_todo(todo, include_relationships: true)}, status: :created, content_type: jsonapi_content_type
     else
       render_validation_errors(todo)
     end
@@ -141,7 +141,7 @@ class TodosController < JsonapiController
     end
 
     if @todo.update(update_params)
-      render json: {data: serialize_todo(@todo)}, content_type: jsonapi_content_type
+      render json: {data: serialize_todo(@todo, include_relationships: true)}, content_type: jsonapi_content_type
     else
       render_validation_errors(@todo)
     end
