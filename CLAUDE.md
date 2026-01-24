@@ -128,8 +128,7 @@ When writing tests for JSON:API endpoints, always verify:
 
 ### Configuration Notes
 - **CORS**: Wide open (`origins "*"`) - see [config/initializers/cors.rb](config/initializers/cors.rb)
-- **Ruby version**: 3.4.5 (see [.ruby-version](.ruby-version))
-- **Rails version**: 8.0.3
+- **Ruby version**: see [.ruby-version](.ruby-version)
 - **Database**: PostgreSQL with databases `surely_development`, `surely_test`, `surely_production`
 
 ## Current Migration Work
