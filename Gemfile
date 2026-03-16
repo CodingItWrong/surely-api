@@ -13,13 +13,13 @@ gem "nokogiri"
 gem "net-smtp"
 
 group :development do
-  gem "listen", ">= 3.0.5", "< 3.11"
   gem "standard"
 end
 
 group :development, :test do
   gem "rspec-rails"
   gem "coderay"
+  gem "debug"
 end
 
 group :test do
