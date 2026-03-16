@@ -9,7 +9,6 @@ gem "rack-cors"
 gem "bcrypt"
 gem "doorkeeper"
 gem "nokogiri"
-gem "net-smtp"
 
 group :development, :test do
   gem "coderay"

@@ -290,7 +290,6 @@ DEPENDENCIES
   debug
   doorkeeper
   factory_bot_rails
-  net-smtp
   nokogiri
   pg (>= 0.18, < 2.0)
   puma (~> 7.2)
