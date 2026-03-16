@@ -8,7 +8,6 @@ gem "puma", "~> 7.2"
 gem "rack-cors"
 gem "bcrypt"
 gem "doorkeeper"
-gem "dotenv-rails"
 gem "nokogiri"
 gem "net-smtp"
 
