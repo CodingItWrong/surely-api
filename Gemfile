@@ -11,8 +11,6 @@ gem "doorkeeper"
 gem "dotenv-rails"
 gem "nokogiri"
 gem "net-smtp"
-gem "csv"
-gem "ostruct"
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.11"
@@ -20,7 +18,6 @@ group :development do
 end
 
 group :development, :test do
-  gem "pry-rails"
   gem "rspec-rails"
   gem "coderay"
 end
