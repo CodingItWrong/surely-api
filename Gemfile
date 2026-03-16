@@ -11,14 +11,11 @@ gem "doorkeeper"
 gem "nokogiri"
 gem "net-smtp"
 
-group :development do
-  gem "standard"
-end
-
 group :development, :test do
-  gem "rspec-rails"
   gem "coderay"
   gem "debug"
+  gem "rspec-rails"
+  gem "standard"
 end
 
 group :test do
