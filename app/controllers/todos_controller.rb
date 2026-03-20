@@ -94,6 +94,7 @@ class TodosController < JsonapiController
     todo = current_user.todos.new(
       name: attributes["name"],
       notes: attributes["notes"],
+      url: attributes["url"],
       deferred_until: attributes["deferred-until"],
       completed_at: attributes["completed-at"],
       deleted_at: attributes["deleted-at"]
@@ -126,6 +127,7 @@ class TodosController < JsonapiController
     update_params = {}
     update_params[:name] = attributes["name"] if attributes.key?("name")
     update_params[:notes] = attributes["notes"] if attributes.key?("notes")
+    update_params[:url] = attributes["url"] if attributes.key?("url")
     update_params[:deferred_until] = attributes["deferred-until"] if attributes.key?("deferred-until")
     update_params[:completed_at] = attributes["completed-at"] if attributes.key?("completed-at")
     update_params[:deleted_at] = attributes["deleted-at"] if attributes.key?("deleted-at")
@@ -166,6 +168,7 @@ class TodosController < JsonapiController
       attributes: {
         "name" => todo.name,
         "notes" => todo.notes,
+        "url" => todo.url,
         "completed-at" => todo.completed_at&.iso8601,
         "deleted-at" => todo.deleted_at&.iso8601,
         "deferred-until" => todo.deferred_until&.to_time&.iso8601,
